@@ -2,8 +2,8 @@
 PRACTICE Test 1, problem 2.
 
 Authors: David Mutchler, Valerie Galluzzi, Mark Hays, Amanda Stouder,
-         their colleagues and PUT_YOUR_NAME_HERE.
-"""  # TODO: 1. PUT YOUR NAME IN THE ABOVE LINE.
+         their colleagues and Jaxon Hoffman.
+"""  # Done 1
 
 import rosegraphics as rg
 
@@ -26,7 +26,6 @@ import rosegraphics as rg
 #    STOP working on that problem and ASK YOUR INSTRUCTOR FOR HELP
 #    on it, in class or via Piazza.
 ########################################################################
-
 
 def main():
     """ Calls the   TEST   functions in this module. """
@@ -101,8 +100,30 @@ def problem2a(circle, rectangle, window):
       :type rectangle: rg.Rectangle
       :type window:    rg.RoseWindow
     """
+
+    circle.attach_to(window)
+    rectangle.attach_to(window)
+
+    window.render()
+
+    window.continue_on_mouse_click()
+
+    line = rg.Line(rectangle.get_upper_right_corner(),
+                   rectangle.get_lower_left_corner())
+    line.arrow = 'last'
+    line.attach_to(window)
+
+    window.render()
+
+    window.continue_on_mouse_click()
+
+    circle.fill_color = rectangle.outline_color
+    circle.attach_to(window)
+
+    window.render()
+
     # ------------------------------------------------------------------
-    # TODO: 2. Implement and test this function.
+    # Done 2
     #          Tests have been written for you (above).
     # ------------------------------------------------------------------
     # ------------------------------------------------------------------
@@ -172,8 +193,23 @@ def problem2b(rect, n, delta, win):
       :type delta:  int
       :type win:    rg.RoseWindow
     """
+    dx = delta
+    dy = delta
+
+    rect.attach_to(win)
+
+    for _ in range(n - 1):
+        new_corner1 = rg.Point(rect.get_upper_left_corner().x - dx,
+                               rect.get_upper_left_corner().y - dy)
+        new_corner2 = rg.Point(rect.get_lower_right_corner().x + dx,
+                               rect.get_lower_right_corner().y + dy)
+        rect = rg.Rectangle(new_corner1, new_corner2)
+        rect.attach_to(win)
+
+    win.render()
+
     # ------------------------------------------------------------------
-    # TODO: 3. Implement and test this function.
+    # Done 3
     #          Tests have been written for you (above).
     # ------------------------------------------------------------------
     # ------------------------------------------------------------------

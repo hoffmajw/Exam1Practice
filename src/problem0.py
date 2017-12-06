@@ -8,8 +8,8 @@ These problems illustrate concepts that previous problems have not emphasized:
   -- animation (Problem 0c)
 
 Authors: David Mutchler, Valerie Galluzzi, Mark Hays, Amanda Stouder,
-         their colleagues and PUT_YOUR_NAME_HERE.
-"""  # TODO: 1. PUT YOUR NAME IN THE ABOVE LINE.
+         their colleagues and Jaxon Hoffman.
+"""  # Done 1
 
 import rosegraphics as rg
 
@@ -145,8 +145,16 @@ def problem0a(n):
       -- If the given integer is 246, this function returns False,
            since (2 + 4 + 6) is 12, which is NOT odd.
     """
+
+    test = sum_of_digits(n)
+
+    if test % 2 == 0:
+        return False
+    else:
+        return True
+
     # ------------------------------------------------------------------
-    # TODO: 2. Implement and test this function.
+    # Done 2
     #          Tests have been written for you (above).
     #
     ####################################################################
@@ -217,8 +225,18 @@ def problem0b(n):
       -- If n is 200, the correct answer is 46,
            since there are 46 primes between 2 and 200.
      """
+
+    count = 0
+
+    for k in range(2, n + 1):
+        test = is_prime(k)
+        if test == True:
+            count += 1
+
+    return count
+
     # ------------------------------------------------------------------
-    # TODO: 3. Implement and test this function.
+    # Done 3
     #          Tests have been written for you (above).
     #
     ####################################################################
@@ -285,8 +303,23 @@ def problem0c(circle, n, window):
       :type n: int
       :type window: rg.RoseWindow
     """
+
+    circle.attach_to(window)
+    center_new = circle.center
+    window.render(.5)
+
+    for _ in range(n):
+        x_cor = center_new.x + (circle.radius *2)
+        y_cor = center_new.y
+        center_new = rg.Point(x_cor, y_cor)
+        circle1 = rg.Circle(center_new, circle.radius)
+        circle1.fill_color = circle.fill_color
+        circle1.attach_to(window)
+
+        window.render(.5)
+
     # ------------------------------------------------------------------
-    # TODO: 4. Implement and test this function.
+    # Done 4
     #          Tests have been written for you (above).
     #
     ####################################################################

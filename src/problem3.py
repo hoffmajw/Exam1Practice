@@ -2,8 +2,8 @@
 PRACTICE Test 1, problem 3.
 
 Authors: David Mutchler, Valerie Galluzzi, Mark Hays, Amanda Stouder,
-         their colleagues and PUT_YOUR_NAME_HERE.
-"""  # TODO: 1. PUT YOUR NAME IN THE ABOVE LINE.
+         their colleagues and Jaxon Hoffman.
+"""  # Done 1
 
 import rosegraphics as rg
 
@@ -30,14 +30,14 @@ import rosegraphics as rg
 
 def main():
     """ Calls the   TEST   functions in this module. """
-    run_test_problem3a()
+    # run_test_problem3a()
     run_test_problem3b()
 
 
 def run_test_problem3a():
     """ Tests the   problem3a   function. """
     # ------------------------------------------------------------------
-    # TODO: 2. Implement this TEST function.
+    # Done 2
     #   It TESTS the  problem1a  function defined below.
     #   Include at least **   5   ** tests (we wrote four for you).
     # ------------------------------------------------------------------
@@ -103,6 +103,20 @@ def run_test_problem3a():
     # your choice), add 1 more test case of your own choosing.
     # ------------------------------------------------------------------
 
+    # Test 5
+    title = 'Problem 3a. Test 5: Start at (50, 50), 3 lines'
+    window4 = rg.RoseWindow(450, 300, title)
+    point = rg.Point(50, 50)
+    expected = 9
+    answer = problem3a(window4, point, 3)
+    print()
+    print('Test 5 expected: ', expected)
+    print('       actual: ', answer)
+
+    window4.continue_on_mouse_click()
+
+
+
 
 def problem3a(window, point, n):
     """
@@ -136,8 +150,33 @@ def problem3a(window, point, n):
         :type point:  rg.Point
         :type n:      int
     """
+    total = 0
+
+    line = rg.Line(point, rg.Point(point.x, point.y + 50))
+    thick = 1
+    line.thickness = thick
+    line.attach_to(window)
+
+    total += thick
+
+    window.render()
+
+    for _ in range(n-1):
+        point = rg.Point(point.x + 20, point.y + 10)
+        line = rg.Line(point, rg.Point(point.x, point.y + 50))
+        if thick <= 11:
+            thick = thick + 2
+        else:
+            thick = 13
+        line.thickness = thick
+        line.attach_to(window)
+        total += thick
+
+    window.render()
+    return total
+
     # ------------------------------------------------------------------
-    # TODO: 3. Implement and test this function.
+    # Done 3
     #   Note that you should write its TEST function first (above).
     # ------------------------------------------------------------------
     # ------------------------------------------------------------------
@@ -200,8 +239,26 @@ def problem3b(m, point1):
         :type m:      int
         :type point1: rg.Point
     """
+
+    window = rg.RoseWindow(400, 650)
+
+    total = 0
+
+    number_of_lines = 3
+
+    total = problem3a(window, point1, number_of_lines)
+
+    for _ in range(m - 1):
+        number_of_lines += 2
+        point1 = rg.Point(point1.x, point1.y + 60)
+        total = problem3a(window, point1, number_of_lines)
+
+    window.close_on_mouse_click()
+
+    return total
+
     # ------------------------------------------------------------------
-    # TODO: 4. Implement and test this function.
+    # Done 4
     #          Tests have been written for you (above).
     #
     ####################################################################
